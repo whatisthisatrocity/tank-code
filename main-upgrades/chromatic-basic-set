@@ -1,0 +1,176 @@
+//
+//
+// Chromatic tanks set
+//
+//
+
+// please note the formatting does not match in entity editor and here
+// so there may be random whitespaces
+// it still works though. I tested it.
+
+
+
+defExports.chromaticbullet = {
+    LABEL: 'Bullet',
+    TYPE: 'bullet',
+    COLOR: "#000000",
+    ACCEPTS_SCORE: false,
+    BODY: {
+        PENETRATION: bullet.PENETRATION,
+        SPEED: bullet.SPEED,
+        RANGE: bullet.RANGE,
+        DENSITY: bullet.DENSITY,
+        HEALTH: bullet.HEALTH,
+        DAMAGE: bullet.DAMAGE,
+        PUSHABILITY: bullet.PUSHABILITY
+    },
+    FACING_TYPE: 'smoothWithMotion',
+    CAN_GO_OUTSIDE_ROOM: true,
+    HITS_OWN_TYPE: 'never',
+    DIE_AT_RANGE: true,
+    PROPS: [
+		{
+		POSITION: [1.1, 0, 0.06,-70,0],
+		SHAPE: 0,
+		COLOR: "#00e9FF",
+		STROKE: false
+	},
+	makeAura("#000000"),
+	{
+		POSITION: [1.1, 0, -.06,-70,0],
+		SHAPE: 0,
+		COLOR: "#ff00ff",
+		STROKE: false
+	},
+    ]
+};
+
+defExports.chromaticBasic = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Chromatic Basic',
+	COLOR: "#000000",
+    TOOLTIP: "the tiktok tank apparently, inspired by chicken leg aka bolyb",
+    GUNS: [{
+        POSITION: [14.9,2, 1, 5, 5, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.fake,g.basic, g.less_pen]),
+            TYPE: defExports.bullet,
+            // modded note - this is the equivalent of STROKE: false for the guns
+			COLOR_UNMIX: 1,
+			COLOR: "#00e9FF",
+        }
+    },
+	{
+        POSITION: [14.9,2, 1, 5, -5, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.fake,g.basic, g.less_pen]),
+            TYPE: defExports.bullet,
+			COLOR_UNMIX: 1,
+			COLOR: "#ff00ff",
+        }
+    },{
+        // modded note - putting this on the bottom actually layers it on top of the rest
+		// this is how gun layering is done
+        POSITION: [19.3, 8, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.less_pen]),
+            TYPE: defExports.chromaticbullet,
+			COLOR: "#000000",
+        }
+    },
+	
+	],
+    PROPS: [
+	{
+		POSITION: [1, 0, 0.06,-70,0],
+		SHAPE: 0,
+		COLOR: "#00e9FF",
+        // modded note - removes borders
+		STROKE: false
+	},
+	makeAura("#000000"),
+	{
+		POSITION: [1, 0, -.06,-70,0],
+		SHAPE: 0,
+		COLOR: "#ff00ff",
+		STROKE: false
+	},
+
+
+	]
+};
+
+defExports.chromaticBasicUpgraded = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Chromatic Basic upgraded',
+    COLOR: "#000000",
+    TOOLTIP: "the tiktok tank apparently, inspired by chicken leg aka bolyb",
+    // the turret is identical to chromaticBasic
+    GUNS: [{
+        POSITION: [14.9, 2, 1, 5, 5, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.fake, g.basic, g.less_pen]),
+            TYPE: defExports.bullet,
+            COLOR_UNMIX: 1,
+            COLOR: "#00e9FF",
+        }
+    }, {
+        POSITION: [14.9, 2, 1, 5, -5, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.fake, g.basic, g.less_pen]),
+            TYPE: defExports.bullet,
+            COLOR_UNMIX: 1,
+            COLOR: "#ff00ff",
+        }
+    }, {
+        POSITION: [19.3, 8, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.less_pen]),
+            TYPE: defExports.chromaticbullet,
+            COLOR: "#000000",
+        }
+    }],
+    PROPS: [
+    {
+        POSITION: [1, 0, 0.06,-70,0],
+        SHAPE: 0,
+        COLOR: "#00e9FF",
+        STROKE: false
+    },
+    makeAura("#000000"),
+    {
+        POSITION: [1, 0, -.06,-70,0],
+        SHAPE: 0,
+        COLOR: "#ff00ff",
+        STROKE: false
+    },
+    {
+        POSITION: [0.7, 0, 0,-70,1],
+        SHAPE: 0,
+        COLOR: "#00e9FF",
+        STROKE: false
+    },
+    {
+        POSITION: [0.67, 0, 0.05,-70,1],
+        SHAPE: 0,
+        COLOR: "#ff00ff",
+        STROKE: false
+    },
+    {
+        POSITION: [0.65, 0, 0,-70,1],
+        SHAPE: 0,
+        COLOR: "#000000",
+        STROKE: false
+    },
+    ]
+};
+
+// i adapt this for entity editor
+// since branch() does not really work as well
+// in it
+defExports.developer_parent_upgrades = {
+	PARENT: [defExports.developer_parent],
+	LABEL: "Custom tanks"
+}
+defExports.developer_parent_upgrades.UPGRADES_TIER_1 = [defExports.chromaticBasic,defExports.chromaticBasicUpgraded]
+defExports.basic.UPGRADES_TIER_4 = [defExports.diep0, defExports.featured_tanks,defExports.developer_parent_upgrades]

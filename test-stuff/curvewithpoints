@@ -1,3 +1,8 @@
+// please note the formatting does not match in entity editor and here
+// so there may be random whitespaces
+// it still works though. I tested it.
+
+
 defExports.curvewith3points1 = {
     PARENT: [defExports.genericTank],
     LABEL: "curve with 3 points 1",

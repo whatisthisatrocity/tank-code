@@ -1,0 +1,505 @@
+// ascended pentaquark
+
+// please note the formatting does not match in visual studio code and here
+// so there may be random whitespaces
+// it still works though. I tested it.
+
+
+defExports.obstacleTurret12 = {
+    LABEL: 'Shield',
+    DAMAGE_CLASS: 1,
+    SHAPE: 0,
+    BODY: {
+        PUSHABILITY: 0,
+        HEALTH: 1e4,
+        REGEN: 1000,
+        DAMAGE: 1,
+        RESIST: 10000,
+        STEALTH: 1,
+        DENSITY: 10000
+    },
+    VALUE: 0,
+    COLOR: 228,
+    HITS_OWN_TYPE: "shield",
+	FACING_TYPE: 'autospin',
+	TURRETS: [{
+        POSITION: [18, 18, 0, 0, 0, 1],
+        TYPE: [defExports.backShieldTurret,{
+			FACING_TYPE: 'autospin',
+			   }]
+    },{
+        POSITION: [18, 18, 0, 90, 0, 1],
+        TYPE: defExports.backShieldTurret
+    },{
+        POSITION: [18, 18, 0, 180, 0, 1],
+        TYPE: defExports.backShieldTurret
+    },{
+        POSITION: [18, 18, 0, 270, 0, 1],
+        TYPE: defExports.backShieldTurret
+    }]
+};
+defExports.AscendedPentaquarkturretBase = {
+    LABEL: 'Base',
+    SYNC_TURRET_SKILLS: true,
+    SHAPE: 136,
+	SIZE: 90,
+    COLOR: 9,
+    FACING_TYPE: 'autospin2',
+    INDEPENDENT: true,
+    TURRETS: [{
+        POSITION: [6.65, 9.85, 0, 0, 360, 1],
+        TYPE: defExports.solarSystem
+    }, {
+        POSITION: [6, 9.85, 0, 72, 360, 1],
+        TYPE: defExports.obstacleTurret12
+    }, {
+        POSITION: [6.65, 9.85, 0, 144, 360, 1],
+		TYPE: defExports.toolbelt
+    },{
+		POSITION: [6,9.85,0,216,360,1],
+		TYPE: defExports.kilonova
+	}]
+};
+
+defExports.obstacleTurrettwobrotrustme = {
+    LABEL: 'Shield',
+    DAMAGE_CLASS: 1,
+    SHAPE: 0,
+    BODY: {
+        PUSHABILITY: 0,
+        HEALTH: 1e4,
+        REGEN: 1000,
+        DAMAGE: 1,
+        RESIST: 10000,
+        STEALTH: 1,
+        DENSITY: 10000
+    },
+    VALUE: 0,
+    COLOR: 228,
+    HITS_OWN_TYPE: "shield",
+	FACING_TYPE: 'autospin',
+	TURRETS: [{
+        POSITION: [18, 18, 0, 0, 0, 1],
+        TYPE: [defExports.backShieldTurret,{
+			FACING_TYPE: 'autospin',
+			   }]
+    },{
+        POSITION: [18, 18, 0, 90, 0, 1],
+        TYPE: defExports.backShieldTurret
+    },{
+        POSITION: [18, 18, 0, 180, 0, 1],
+        TYPE: defExports.backShieldTurret
+    },{
+        POSITION: [18, 18, 0, 270, 0, 1],
+        TYPE: defExports.backShieldTurret
+    }]
+};
+defExports.obstacleTurretonebecausegameconfused = {
+    LABEL: 'Shield',
+    DAMAGE_CLASS: 1,
+    SHAPE: 0,
+    BODY: {
+        PUSHABILITY: 0,
+        HEALTH: 1e4,
+        REGEN: 1000,
+        DAMAGE: 1,
+        RESIST: 10000,
+        STEALTH: 1,
+        DENSITY: 10000
+    },
+    VALUE: 0,
+    COLOR: 34,
+    SYNC_SKILLS: true,
+    SYNC_TURRET_SKILLS: true,
+    HITS_OWN_TYPE: "shield"
+};
+defExports.toolbeltBase = {
+    PARENT: [defExports.genericTank],
+    LABEL: "Base",
+    COLOR: 9,
+    SHAPE: 136,
+    SYNC_TURRET_SKILLS: true,
+    SYNC_SKILLS: true,
+    FACING_TYPE: 'autospin',
+    INDEPENDENT: true,
+    TURRETS: [{
+        POSITION: [4.65, 9.85, 0, 45, 120, 1],
+        TYPE: defExports.toolbeltTwin
+    }, {
+        POSITION: [4.65, 9.85, 0, 135, 120, 1],
+        TYPE: defExports.toolbeltSniper
+    }, {
+        POSITION: [4.65, 9.85, 0, 225, 120, 1],
+        TYPE: defExports.toolbeltMachine
+    }, {
+        POSITION: [4.65, 9.85, 0, 315, 120, 1],
+        TYPE: defExports.toolbeltPounder
+    }]
+};
+// the override tank actually has what we need
+// not the command override, the tank override
+defExports.overrideProptwo = {
+    SHAPE: 4,
+    COLOR: 12, // 13
+    GUNS: []
+};
+for (let i = 0; i < 4; i++) {
+    let angle = i * 90;
+    defExports.overrideProptwo.GUNS = defExports.overrideProptwo.GUNS.concat({
+        POSITION: [20, 1.85, 1, 0, 0, angle, 0],
+        PROPERTIES: {
+            COLOR: 12
+        }
+    }, {
+        POSITION: [20, 1.85, 1, 0, 7.25, angle, 0],
+        PROPERTIES: {
+            COLOR: 12
+        }
+    }, {
+        POSITION: [20, 1.85, 1, 0, -7.25, angle, 0],
+        PROPERTIES: {
+            COLOR: 12
+        }
+    });
+}
+
+defExports.ransomwaresummoner = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Summoner',
+    DANGER: 9.5, // the ransomware tank has a high danger value, according to the wiki
+    STAT_NAMES: statNames.necro,
+    COLOR: 18,
+    SIZE: 22,
+    BODY: {
+        ACCELERATION: base.ACCEL * .5,
+        SPEED: 1.84,
+        FOV: 1.1,
+        HEALTH: 1500,
+        REGEN: .0063
+    },
+    SHAPE: 4,
+    MAX_CHILDREN: 38,
+    GUNS: [{
+        POSITION: [3.5, 8.65, 1.2, 8, 0, 0, .25],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.drone, g.summon]),
+            TYPE: defExports.squareDrone,
+            AUTOFIRE: true,
+            SYNCS_SKILLS: true,
+            STAT_CALCULATOR: gunCalcNames.drone,
+            WAIT_TO_CYCLE: true,
+            COLOR_OVERRIDE: 18
+        }
+    }, {
+        POSITION: [3.5, 8.65, 1.2, 8, 0, 180, .75],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.drone, g.summon]),
+            TYPE: defExports.squareDrone,
+            AUTOFIRE: true,
+            SYNCS_SKILLS: true,
+            STAT_CALCULATOR: gunCalcNames.drone,
+            WAIT_TO_CYCLE: true,
+            COLOR_OVERRIDE: 18
+        }
+    }],
+    TURRETS: [{
+        POSITION: [6.75, 0, 0, 0, 0, 1],
+        TYPE: defExports.overrideProptwo
+    }]
+};
+
+defExports.blueObstacleTurret12 = {
+    PARENT: [defExports.obstacleTurret],
+    COLOR: 23,
+	PROPS: [makeAura(23)]
+};
+defExports.strangelet = {
+    PARENT: [defExports.bullet],
+    LABEL: 'Strangelet',
+    INDEPENDENT: true,
+    BODY: {
+        SPEED: 1,
+        DENSITY: 5
+    },
+    TURRETS: [{
+        POSITION: [34, 0, 0, 0, 360, 1],
+        TYPE: defExports.blueObstacleTurret12
+    }]
+};
+defExports.AscendedPentaquarkkilonova = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Kilonova',
+    DANGER: 7,
+	GUNS: [], // we need to define GUNS to use it
+    TURRETS: [{
+        POSITION: [34, 0, 0, 0, 0, 0],
+        TYPE: defExports.kilonovaBase
+    }, {
+        POSITION: [21, 0, 0, 0, 0, 1],
+        TYPE: defExports.blueObstacleTurret12
+    }]
+};
+for (let i = 0; i < 36; i++) defExports.AscendedPentaquarkkilonova.GUNS.push({
+    POSITION: [2, 3.5, 1, 0, 0, i * 10, 0],
+    PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.strange, g.precice, g.smaller]),
+        TYPE: defExports.strangelet,
+        AUTOFIRE: true
+    }
+});
+defExports.turretBase12345 = {
+    LABEL: 'Base',
+    SYNC_TURRET_SKILLS: true,
+    SHAPE: 136,
+    FACING_TYPE: 'autospin',
+    INDEPENDENT: true,
+    TURRETS: [{
+        POSITION: [4.65, 9.85, 0, 270, 220, 1],
+        TYPE: defExports.obstacleTurretonebecausegameconfused
+    }]
+};
+defExports.ascendedpentaquarkcoronavirus = {
+    PARENT: [defExports.genericTank],
+    LABEL: 'Coronavirus',
+    DANGER: 7,
+    COLOR: 23,
+    BODY: {
+        FOV: 1.1,
+        ACCELERATION: base.ACCEL * .9
+    },
+    STAT_NAMES: statNames.generic,
+    GUNS: [{
+        POSITION: [23, 6, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.contagi]),
+            TYPE: defExports.disintegratorBullet
+        }
+    }, {
+        POSITION: [21, 4, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.contagi, g.fake]),
+            TYPE: defExports.bullet,
+            COLOR: 31
+        }
+    }, {
+        POSITION: [13, 8, 1, 0, 0, 0, 0]
+    }, {
+        POSITION: [4, 8, 1.7, 13, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.trap, g.more_range, g.less_spread]),
+            TYPE: defExports.trap,
+            STAT_CALCULATOR: gunCalcNames.trap
+        }
+    }],
+	TURRETS: [{
+        POSITION: [34, 0, 0, 0, 0, 0],
+        TYPE: defExports.turretBase12345
+    }]
+};
+defExports.AscendedPentaquarkturretBase = {
+    LABEL: 'ascended pentaquark',
+    SYNC_TURRET_SKILLS: true,
+    SHAPE: 136,
+	SIZE: 90,
+    COLOR: 9,
+    FACING_TYPE: 'autospin2',
+    INDEPENDENT: true,
+    TURRETS: [{
+		// i have to override the controls like this
+		// turrets are not very easy to use
+        POSITION: [5.65, 9.85, 0, 0, 360, 1],
+        // why make a tank as a turret
+        // when you can make a turret as a tank
+        TYPE: [defExports.solarSystem, {
+            COLOR: 34,
+            CONTROLLERS: ["nearestDifferentMaster", "onlyAcceptInArc"]
+        }]
+    }, {
+        POSITION: [5, 9.85, 0, 72, 360, 1],
+        TYPE: defExports.obstacleTurrettwobrotrustme
+    }, {
+        POSITION: [7.65, 9.85, 0, 144, 360, 1],
+		TYPE: defExports.toolbeltBase
+    }, {
+        POSITION: [5, 9.85, 0, 144, 360, 1],
+		TYPE: defExports.obstacleTurretonebecausegameconfused
+    }, {
+        POSITION: [7, 9.85, 0, 216, 360, 1],
+		TYPE: [defExports.ransomwaresummoner, {
+            CONTROLLERS: ["nearestDifferentMaster", "onlyAcceptInArc"]
+        }]
+    }, {
+        POSITION: [5, 9.85, 0, 288, 360, 1],
+        TYPE: defExports.AscendedPentaquarkkilonova
+    }]
+};
+defExports.propstank = {
+    PARENT: [defExports.genericTank],
+	LABEL: "Ascended Pentaquark",
+	// i just use the ek-6 stats since i dont know the actual stats
+	BODY: {
+        FOV: 2,
+        SPEED: 3,
+        ACCELERATION: 1,
+        HEALTH: 2250,
+        DAMAGE: 6,
+        REGEN: .015,
+        DENSITY: base.DENSITY * 2
+    },
+	SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
+    COLOR: 8,
+	SIZE: 30,
+	TURRETS: [
+	{
+        POSITION: [21, 0, 0, 0, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+        POSITION: [21, 0, 0, 72, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+        POSITION: [21, 0, 0, 144, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+        POSITION: [21, 0, 0, -144, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+        POSITION: [21, 0, 0, -72, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+		POSITION: [21, 0, 0, 0, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+	},
+	// the white outline
+	// the yellow part
+    {
+        POSITION: [8, 0, 0, 0, 360, 1],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 4
+		}]
+    }, {
+        POSITION: [13, 0, 0, 72, 360, 1],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 3
+		}]
+    }, {
+        POSITION: [13, 0, 0, 144, 360, 1],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 3
+		}]
+    }, {
+        POSITION: [13, 0, 0, -144, 360, 1],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 3
+		}]
+    }, {
+        POSITION: [13, 0, 0, -72, 360, 1],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 3
+		}]
+    }, {
+		POSITION: [13, 0, 0, 0, 360, 1],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 3
+		}]
+	},
+    
+	],
+	PROPS: [{
+		POSITION: [0.7, 0, 0,0, 2],
+		SHAPE: 0,
+		COLOR: 3
+	}]
+}
+defExports.turretBase1234 = {
+    LABEL: 'Base',
+    SYNC_TURRET_SKILLS: true,
+    SHAPE: 136,
+    FACING_TYPE: 'autospin',
+    INDEPENDENT: true,
+    TURRETS: [{
+        POSITION: [4.65, 9.85, 0, 270, 220, 1],
+        TYPE: [defExports.ascendedpentaquarkcoronavirus, {
+            CONTROLLERS: ["nearestDifferentMaster", "onlyAcceptInArc"],
+			COLOR: 23
+        }]
+    }]
+};
+defExports.ascendedpentaquarktankitself = {
+    PARENT: [defExports.genericTank],
+	LABEL: "Ascended Pentaquark",
+	// i just use the ek-6 stats since i dont know the actual stats
+	BODY: {
+        FOV: 1.5,
+        SPEED: 3,
+        ACCELERATION: 1,
+        HEALTH: 2250,
+        DAMAGE: 6,
+        REGEN: .015,
+        DENSITY: base.DENSITY * 2
+    },
+	SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
+    COLOR: 8,
+	SIZE: 50,
+	GUNS: [
+	{
+        POSITION: [20, 11, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.less_pen]),
+            TYPE: defExports.bullet,
+        }
+    }],
+	TURRETS: [
+    // the yellow part
+    {
+        POSITION: [11, 0, 0, 0, 360, 1],
+        TYPE: defExports.propstank
+    },
+	
+	// the bigger white part
+	{
+        POSITION: [20, 0, 0, 0, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+        POSITION: [20, 0, 0, 72, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+        POSITION: [20, 0, 0, 144, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+        POSITION: [20, 0, 0, -144, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+        POSITION: [20, 0, 0, -72, 360, 0],
+        TYPE: [defExports.spikeBody,{
+			COLOR: 8
+		}]
+    }, {
+        POSITION: [55, 0, 0, 0, 0, 0],
+        TYPE: defExports.AscendedPentaquarkturretBase
+    }, {
+        POSITION: [18, 0, 0, 0, 0, 1],
+        TYPE: defExports.turretBase1234
+    },
+	
+	]
+};

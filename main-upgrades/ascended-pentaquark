@@ -5,6 +5,10 @@
 // it still works though. I tested it.
 
 
+
+// debugged with the help of celtic24gd
+
+
 defExports.obstacleTurret12 = {
     LABEL: 'Shield',
     DAMAGE_CLASS: 1,
@@ -213,7 +217,17 @@ defExports.blueObstacleTurret12 = {
     COLOR: 23,
 	PROPS: [makeAura(23)]
 };
-defExports.strangelet = {
+
+
+
+//
+//	we need to be very careful when defining the tanks
+//  and overriding it with the same base code with no modifications
+//  if we make a tank with the same name and code it displays a recursive/call stack error
+//  tip from celtic24gd
+//
+
+defExports.strangelet2 = {
     PARENT: [defExports.bullet],
     LABEL: 'Strangelet',
     INDEPENDENT: true,
@@ -226,6 +240,7 @@ defExports.strangelet = {
         TYPE: defExports.blueObstacleTurret12
     }]
 };
+
 defExports.AscendedPentaquarkkilonova = {
     PARENT: [defExports.genericTank],
     LABEL: 'Kilonova',
@@ -243,7 +258,7 @@ for (let i = 0; i < 36; i++) defExports.AscendedPentaquarkkilonova.GUNS.push({
     POSITION: [2, 3.5, 1, 0, 0, i * 10, 0],
     PROPERTIES: {
         SHOOT_SETTINGS: combineStats([g.strange, g.precice, g.smaller]),
-        TYPE: defExports.strangelet,
+        TYPE: defExports.strangelet2,
         AUTOFIRE: true
     }
 });
@@ -503,3 +518,13 @@ defExports.ascendedpentaquarktankitself = {
 	
 	]
 };
+
+// i adapt this for entity editor
+// since branch() does not really work as well
+// in it
+defExports.developer_parent_upgrades = {
+	PARENT: [defExports.developer_parent],
+	LABEL: "Custom tanks"
+}
+defExports.developer_parent_upgrades.UPGRADES_TIER_1 = [defExports.ascendedpentaquarktankitself]
+defExports.basic.UPGRADES_TIER_4 = [defExports.diep0, defExports.featured_tanks,defExports.developer_parent_upgrades]
